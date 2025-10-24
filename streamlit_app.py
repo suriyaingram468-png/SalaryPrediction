@@ -1,7 +1,7 @@
-import streamlit as st
-import requests
-import numpy as np
 import os
+import numpy as np
+import requests
+import streamlit as st
 
 # Set page config
 st.set_page_config(
@@ -81,7 +81,7 @@ if submit_button:
             )
         else:
             st.error(f"Error: {response.json().get('error', 'Unknown error')}")
-            
+
     except Exception as e:
         st.error(f"Failed to connect to the prediction service. Error: {str(e)}")
 

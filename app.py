@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify
 from joblib import load
 import numpy as np
 
+
 app = Flask(__name__)
 
 # Load the model when the app starts
@@ -11,6 +12,7 @@ try:
 except Exception as e:
     print(f"Error loading model: {str(e)}")
     model = None
+
 
 @app.route('/predict', methods=['POST'])
 def predict():
@@ -32,13 +34,15 @@ def predict():
         return jsonify({
             'predicted_salaries': prediction.tolist()
         })
-        
+
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+
 
 @app.route('/health', methods=['GET'])
 def health():
     return jsonify({'status': 'healthy'})
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
