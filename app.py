@@ -20,21 +20,16 @@ def predict():
         # Get data from POST request
         data = request.get_json()
         years_exp = data.get('years_experience')
-        
         if years_exp is None:
             return jsonify({'error': 'No years_experience provided'}), 400
-        
         # Convert to numpy array and reshape
         X = np.array(years_exp).reshape(-1, 1)
-        
         # Make prediction
         prediction = model.predict(X)
-        
         # Convert numpy array to list for JSON serialization
         return jsonify({
             'predicted_salaries': prediction.tolist()
         })
-
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
