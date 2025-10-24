@@ -41,12 +41,12 @@ st.title("💰 Salary Prediction")
 st.markdown("Enter years of experience to predict the expected salary.")
 
 # API Configuration
-# When running in Docker, use 'http://api:5000', otherwise use 'http://localhost:5000'
+# API_URL = os.getenv('API_URL', 'http://localhost:5000') + '/predict'
+# # When running in Docker, use 'http://api:5000', otherwise use 'http://localhost:5000'
 API_URL = os.getenv('API_URL', 'http://localhost:5000')
 if 'API_URL' not in os.environ and os.path.exists('/.dockerenv'):
     API_URL = 'http://api:5000'
 API_URL = API_URL.rstrip('/') + '/predict'
-
 # Input form
 with st.form("prediction_form"):
     col1, col2 = st.columns(2)
