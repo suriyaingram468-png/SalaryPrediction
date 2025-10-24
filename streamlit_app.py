@@ -1,7 +1,7 @@
-import os
-import numpy as np
-import requests
 import streamlit as st
+import requests
+import numpy as np
+import os
 
 # Set page config
 st.set_page_config(
@@ -41,12 +41,8 @@ st.title("💰 Salary Prediction")
 st.markdown("Enter years of experience to predict the expected salary.")
 
 # API Configuration
-# API_URL = os.getenv('API_URL', 'http://localhost:5000') + '/predict'
-# # When running in Docker, use 'http://api:5000', otherwise use 'http://localhost:5000'
-API_URL = os.getenv('API_URL', 'http://localhost:5000')
-if 'API_URL' not in os.environ and os.path.exists('/.dockerenv'):
-    API_URL = 'http://api:5000'
-API_URL = API_URL.rstrip('/') + '/predict'
+API_URL = os.getenv('API_URL', 'http://localhost:5000') + '/predict'
+
 # Input form
 with st.form("prediction_form"):
     col1, col2 = st.columns(2)
@@ -85,7 +81,7 @@ if submit_button:
             )
         else:
             st.error(f"Error: {response.json().get('error', 'Unknown error')}")
-
+            
     except Exception as e:
         st.error(f"Failed to connect to the prediction service. Error: {str(e)}")
 
